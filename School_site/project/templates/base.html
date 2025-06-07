@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Evason School Portal</div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <nav>
+            {% if user.is_authenticated %}
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Result</a></li>
+            <li><a href="{% url 'news' %}">News</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+          {% else %}
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+          </ul>
+          {% endif %}
+        </nav>
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span></span>
+        </label>
+      </header>
+
+      {% block content %}
+
+      {% endblock %}
+
+      <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We provide secure and transparent crypto services tailored to your needs.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}">Home</a></li>
+                    <li><a href="{% url 'profile' %}">Dashboard</a></li>
+                    <li><a href="{% url 'index' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="" alt="Twitter"></a>
+                    <a href="#"><img src="" alt="Facebook"></a>
+                    <a href="#"><img src="" alt="GitHub"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; {{ year }} CryptoSite. All rights reserved.
+        </div>
+    </footer>
+
+<style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+    }
+  
+    /* Navbar Styles */
+    .navbar {
+      background-color: #2c3e50;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      position: relative;
+    }
+  
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+  
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+  
+    nav ul li a:hover {
+      color: #18bc9c;
+    }
+  
+    .nav-toggle {
+      display: none;
+    }
+  
+    .nav-toggle-label {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+  
+    .nav-toggle-label span,
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+      display: block;
+      background: white;
+      height: 3px;
+      width: 25px;
+      border-radius: 3px;
+      position: relative;
+      transition: 0.3s;
+    }
+  
+    .nav-toggle-label span::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+    }
+  
+    .nav-toggle-label span::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+    }
+  
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle-label {
+        display: flex;
+      }
+  
+      nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #2c3e50;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+      }
+  
+      nav ul {
+        flex-direction: column;
+        padding: 20px;
+      }
+  
+      .nav-toggle:checked + nav {
+        display: flex;
+      }
+    }
+  </style>
+  <style>
+
+.site-footer {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    padding: 40px 20px 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+    margin: 20px;
+}
+
+.footer-section h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.footer-section p,
+.footer-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ffffff;
+}
+
+.social-icons a {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #999;
+}
+</style>  

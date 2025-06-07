@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ posts.title }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    .header {
+      background-color: #003366;
+      padding: 30px 20px;
+      color: white;
+      text-align: center;
+
+      margin-bottom: 40px;
+    }
+
+    .header h2 {
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .leftcolumn {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #003366;
+    }
+
+    .card h5 {
+      font-weight: normal;
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #444;
+      white-space: pre-wrap; /* Preserves line breaks */
+    }
+
+    @media screen and (max-width: 768px) {
+      .card {
+        padding: 20px;
+      }
+
+      .card h1 {
+        font-size: 1.5rem;
+      }
+
+      .card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h2>Read Full News</h2>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <h1>{{ posts.title }}</h1>
+      <h5>{{ posts.created_at }}</h5>
+      <p>{{ posts.body }}</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+{% endblock %}

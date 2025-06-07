@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="result-header">
+  <h1>Welcome, {{ student.username }}</h1>
+  <h2>{{ student.last_name }} {{ student.first_name }}</h2>
+  <p>Class: {{ student.classroom }}</p>
+</div>
+
+{% if results %}
+  {% for result in results %}
+    <h3>{{ result.term }} - {{ result.year }}</h3>
+    <table>
+      <tr><th>Subject</th><th>Test 1</th><th>Test 2</th><th>Exam</th><th>Total</th></tr>
+      <tr><td>Maths</td><td>{{ result.maths_test1 }}</td><td>{{ result.maths_test2 }}</td><td>{{ result.maths_exam }}</td><td>{{ result.maths_total }}</td></tr>
+      <tr><td>English</td><td>{{ result.english_test1 }}</td><td>{{ result.english_test2 }}</td><td>{{ result.english_exam }}</td><td>{{ result.english_total }}</td></tr>
+      <tr><td>Civic</td><td>{{ result.civic_test1 }}</td><td>{{ result.civic_test2 }}</td><td>{{ result.civic_exam }}</td><td>{{ result.civic_total }}</td></tr>
+      <tr><td>Agric</td><td>{{ result.agric_test1 }}</td><td>{{ result.agric_test2 }}</td><td>{{ result.agric_exam }}</td><td>{{ result.agric_total }}</td></tr>
+      <tr><td>Computer</td><td>{{ result.computer_test1 }}</td><td>{{ result.computer_test2 }}</td><td>{{ result.computer_exam }}</td><td>{{ result.computer_total }}</td></tr>
+      <tr><td>Verbal Reasoning</td><td>{{ result.verbal_reasoning_test1 }}</td><td>{{ result.verbal_reasoning_test2 }}</td><td>{{ result.verbal_reasoning_exam }}</td><td>{{ result.verbal_reasoning_total }}</td></tr>
+      <tr><td>Quantitative</td><td>{{ result.quantitative_test1 }}</td><td>{{ result.quantitative_test2 }}</td><td>{{ result.quantitative_exam }}</td><td>{{ result.quantitative_total }}</td></tr>
+      <tr><td>CRS</td><td>{{ result.crs_test1 }}</td><td>{{ result.crs_test2 }}</td><td>{{ result.crs_exam }}</td><td>{{ result.crs_total }}</td></tr>
+      <tr><td>Social Studies</td><td>{{ result.social_studies_test1 }}</td><td>{{ result.social_studies_test2 }}</td><td>{{ result.social_studies_exam }}</td><td>{{ result.social_studies_total }}</td></tr>
+      <tr><td>Government</td><td>{{ result.government_test1 }}</td><td>{{ result.government_test2 }}</td><td>{{ result.government_exam }}</td><td>{{ result.government_total }}</td></tr>
+      <tr><th colspan="4">Total Score</th><th>{{ result.total_score }}</th></tr>
+      <tr><th colspan="4">Total Score</th><th>{{ result.position }}</th></tr>
+    </table>
+    <br>
+  {% endfor %}
+{% else %}
+  <p>No results yet.</p>
+{% endif %}
+
+<style>
+  /* existing styles from you kept as-is */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .result-header {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .result-header h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+
+  .result-header h2 {
+    font-size: 20px;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+
+  .result-header p {
+    font-size: 16px;
+    margin: 4px 0;
+    color: #555;
+  }
+
+  .score-summary {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #2c3e50;
+  }
+</style>
+
+{% endblock %}
