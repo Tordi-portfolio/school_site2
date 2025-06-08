@@ -150,6 +150,9 @@ class Result(models.Model):
 from datetime import datetime
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
-    body = models.CharField(max_length=1000000)
+    title = models.CharField(max_length=200)
+    body = models.TextField(max_length=1000000)
     created_at = models.CharField(max_length=100, default=datetime.now, blank=True)
+
+    def __str__(self):
+        return self.title

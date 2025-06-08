@@ -10,6 +10,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('upload-result/', upload_result_view, name='upload_result'),
+    path('create-post/', views.create_post, name='create_post'),
 
     path('news', views.news, name='news'),
     path('post/<str:pk>', views.post, name='post')
