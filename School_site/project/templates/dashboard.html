@@ -5,11 +5,13 @@
   <h1>Welcome, {{ student.username }}</h1>
   <h2>{{ student.last_name }} {{ student.first_name }}</h2>
   <p>Class: {{ student.classroom }}</p>
-</div>
-
+ </div>
 {% if results %}
   {% for result in results %}
-    <h3>{{ result.term }} - {{ result.year }}</h3>
+    <h3>{{ result.term }}</h3>
+    <h3>{{ result.session }}</h3>
+    <h3>{{ result.year }}</h3>
+
     <table>
       <tr><th>Subject</th><th>Test 1</th><th>Test 2</th><th>Exam</th><th>Total</th></tr>
       <tr><td>Maths</td><td>{{ result.maths_test1 }}</td><td>{{ result.maths_test2 }}</td><td>{{ result.maths_exam }}</td><td>{{ result.maths_total }}</td></tr>

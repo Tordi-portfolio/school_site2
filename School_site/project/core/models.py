@@ -45,11 +45,20 @@ class Result(models.Model):
         ('Second Term', 'Second Term'),
         ('Third Term', 'Third Term'),
     ]
+    SESSION_CHOICES = [
+        ('2024/2025', '2024/2025'),
+        ('2025/2026', '2025/2026'),
+        ('2027/2028', '2027/2028'),
+    ]
 
     term = models.CharField(max_length=20, choices=TERM_CHOICES)
-    year = models.IntegerField()
-    position = models.IntegerField(max_length=3)
+    session = models.CharField(max_length=9, choices=SESSION_CHOICES)
 
+    def __str(self):
+        return self.session
+    
+    year = models.IntegerField()
+    position = models.CharField(max_length=3)
 
     # Example: Maths
     maths_test1 = models.IntegerField(default=0)
