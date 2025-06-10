@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from .models import Result, StudentUser, Post
 from datetime import datetime
 from .forms import ProfileUpdateForm, BlogPostForm, StudentRegistrationForm, ResultUploadForm
-from django.contrib.auth.decorators import user_passes_test
-
 
 # Create your views here.
 
@@ -43,7 +41,7 @@ def profile_view(request):
 @user_passes_test(lambda u: u.is_superuser)
 def create_post(request):
     if request.method == 'POST':
-        form = BlogPostForm(request.POST)
+        form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Post created successfully.")

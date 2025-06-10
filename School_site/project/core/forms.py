@@ -19,7 +19,7 @@ class ResultUploadForm(forms.ModelForm):
 class BlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'body']
+        fields = ['title', 'body','picture', 'video']
 
 
 # Profile Picture

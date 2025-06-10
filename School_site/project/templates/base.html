@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,34 +8,41 @@
     <title>Document</title>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">Evason School Portal</div>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <nav>
-            {% if user.is_authenticated %}
-          <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Result</a></li>
-            <li><a href="{% url 'news' %}">News</a></li>
-            <li><a href="{% url 'profile' %}">Profile</a></li>
-            {% if user.is_superuser %}
-            <li><a href="{% url 'upload_result' %}"> + Upload-Result</a></li>
-            <li><a href="{% url 'create_post' %}"> + Create New Post</a></li>
-            {% endif %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-          </ul>
-          {% else %}
-          <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'register' %}">Register</a></li>
-          </ul>
-          {% endif %}
-        </nav>
-        <label for="nav-toggle" class="nav-toggle-label">
-          <span></span>
-        </label>
-      </header>
+<header class="navbar">
+  <div class="logo-container">
+    <a href="{% url 'index' %}">
+      <img src="{% static 'img/logo.jpg' %}" alt="Evason Logo" class="logo-img">
+    </a>
+    <span class="logo-text">Evason School Portal</span>
+  </div>
+
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <nav>
+    {% if user.is_authenticated %}
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'dashboard' %}">Result</a></li>
+      <li><a href="{% url 'news' %}">News</a></li>
+      <li><a href="{% url 'profile' %}">Profile</a></li>
+      {% if user.is_superuser %}
+      <li><a href="{% url 'upload_result' %}">+ Upload Result</a></li>
+      <li><a href="{% url 'create_post' %}">+ Create Post</a></li>
+      {% endif %}
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+    {% else %}
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'register' %}">Register</a></li>
+    </ul>
+    {% endif %}
+  </nav>
+  <label for="nav-toggle" class="nav-toggle-label">
+    <span></span>
+  </label>
+</header>
+
 
       {% block content %}
 
@@ -67,7 +76,29 @@
         </div>
     </footer>
 
+    <style>
+      .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+    </style>
+
 <style>
+
     /* Reset */
     * {
       margin: 0;

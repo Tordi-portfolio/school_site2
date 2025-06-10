@@ -2,23 +2,77 @@
 
 {% block content %}
 <div class="register-container">
-  <h2 class="register-title">Create an Account</h2>
+  <h2 class="register-title">Student Registration</h2>
 
   <form method="POST" class="form-box">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <p>
+      {{ form.first_name.label_tag }}
+      {{ form.first_name }}
+      {% if form.first_name.errors %}
+        <span class="error">{{ form.first_name.errors }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.last_name.label_tag }}
+      {{ form.last_name }}
+      {% if form.last_name.errors %}
+        <span class="error">{{ form.last_name.errors }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      {% if form.username.errors %}
+        <span class="error">{{ form.username.errors }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.email.label_tag }}
+      {{ form.email }}
+      {% if form.email.errors %}
+        <span class="error">{{ form.email.errors }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.classroom.label_tag }}
+      {{ form.classroom }}
+      {% if form.classroom.errors %}
+        <span class="error">{{ form.classroom.errors }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+      {% if form.password1.errors %}
+        <span class="error">{{ form.password1.errors }}</span>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+      {% if form.password2.errors %}
+        <span class="error">{{ form.password2.errors }}</span>
+      {% endif %}
+    </p>
+
+    <div class="show-password">
+      <input type="checkbox" onclick="togglePasswords()"> Show Passwords
+    </div>
+
     <button type="submit" class="register-button">Register</button>
   </form>
 
-  <p class="login-link">
-    Already have an account? <a href="{% url 'login' %}">Login</a>
-  </p>
-
-  {% if messages %}
-    {% for message in messages %}
-      <p class="form-message">{{ message }}</p>
-    {% endfor %}
-  {% endif %}
+  <div class="login-link">
+    Already registered? <a href="{% url 'login' %}">Login</a>
+  </div>
 </div>
 
 <style>
@@ -35,40 +89,51 @@
   .register-title {
     text-align: center;
     color: #1a73e8;
+    font-size: 28px;
     margin-bottom: 25px;
   }
 
-  .form-box {
-    display: flex;
-    flex-direction: column;
-  }
-
   .form-box p {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .form-box label {
-    font-weight: 500;
+    font-weight: 600;
     color: #333;
     display: block;
     margin-bottom: 6px;
   }
 
-  .form-box input {
+  .form-box input,
+  .form-box select {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
+    box-sizing: border-box;
   }
 
-  .form-box input:focus {
+  .form-box input:focus,
+  .form-box select:focus {
     outline: none;
     border-color: #1a73e8;
     box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
   }
 
+  .error {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
+  .show-password {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
   .register-button {
+    width: 100%;
     padding: 12px;
     background-color: #1a73e8;
     color: white;
@@ -98,11 +163,35 @@
     text-decoration: underline;
   }
 
-  .form-message {
-    text-align: center;
-    color: green;
-    font-size: 14px;
-    margin-top: 10px;
+  @media (max-width: 600px) {
+    .register-container {
+      padding: 20px;
+    }
+
+    .register-title {
+      font-size: 24px;
+    }
+
+    .form-box input,
+    .form-box select {
+      font-size: 14px;
+    }
+
+    .register-button {
+      font-size: 15px;
+    }
   }
 </style>
+
+<script>
+function togglePasswords() {
+  const pw1 = document.getElementById("id_password1");
+  const pw2 = document.getElementById("id_password2");
+  if (pw1 && pw2) {
+    const type = pw1.type === "password" ? "text" : "password";
+    pw1.type = type;
+    pw2.type = type;
+  }
+}
+</script>
 {% endblock %}

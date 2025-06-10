@@ -14,7 +14,8 @@
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" required>
+      <input type="password" id="password" name="password" required>
+      <input type="checkbox" onclick="togglePassword()"> Show Password
     </div>
 
     <button type="submit" class="login-button">Login</button>
@@ -102,4 +103,12 @@
     text-decoration: underline;
   }
 </style>
+
+<script>
+function togglePassword() {
+    const pwField = document.getElementById("password");
+    pwField.type = pwField.type === "password" ? "text" : "password";
+}
+</script>
+
 {% endblock %}

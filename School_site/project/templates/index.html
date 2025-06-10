@@ -3,10 +3,45 @@
 
     {% block content %}
 
+    {% load static %}
+
+    <style>
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.large-profile-img {
+    width: 80%;             /* Responsive sizing */
+    max-width: 600px;       /* Cap the size on large screens */
+    height: auto;
+    border-radius: 20px;    /* Slightly rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Professional soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.large-profile-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+
+</style>
+    
+    {% load static %}
+
+<div class="img-container">
+    <img src="{% static 'img/picture.jpg' %}" alt="Profile Image" class="large-profile-img">
+</div>
+
+<div class="spacing">
+    <!-- More content -->
+</div>
+
+        
     <div class="spacing">
-        <div>
-            <h1>Welcome, {{ user.username }}.</h1>
-        </div>
 
         <h1>Evason International Primary and Secondary School</h1>
         <p><i>Bakery Road, Omuoko Aluu, Port Harcourt</i></p>
