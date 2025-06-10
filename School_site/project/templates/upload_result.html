@@ -2,11 +2,29 @@
 {% block content %}
 <div class="form-container">
   <h2>Upload Result</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-  </form>
+  
+    <form method="get">
+  <label for="classroom">Select Class:</label>
+  <select name="classroom" id="classroom" required>
+    <option value="">-- Choose a Class --</option>
+    {% for class in classrooms %}
+      <option value="{{ class.id }}" {% if class.id|stringformat:"s" == selected_class_id %}selected{% endif %}>
+        {{ class.name }}
+      </option>
+    {% endfor %}
+  </select>
+  <button type="submit">Next</button>
+</form>
+
+{% if form %}
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit Result</button>
+</form>
+{% endif %}
+</div>
+
 </div>
 
 <style>
@@ -87,5 +105,16 @@ button[type="submit"]:hover {
 }
 
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Auto-submit the form when a classroom is selected
+  $(document).ready(function() {
+    $('select[name="classroom"]').change(function() {
+      this.form.submit();
+    });
+  });
+</script>
+
 
 {% endblock %}

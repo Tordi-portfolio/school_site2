@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .models import Result, StudentUser, Post
+from .models import Result, StudentUser, Post, Classroom
 from datetime import datetime
 from .forms import ProfileUpdateForm, BlogPostForm, StudentRegistrationForm, ResultUploadForm
 
@@ -13,15 +13,26 @@ def is_superuser(user):
 
 @user_passes_test(is_superuser)
 def upload_result_view(request):
+    selected_class_id = request.GET.get('classroom') or request.POST.get('classroom')
+    form = None
+
     if request.method == 'POST':
         form = ResultUploadForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Result uploaded.")
+            result = form.save(commit=False)
+            result.student = form.cleaned_data['student']
+            result.save()
+            messages.success(request, "Result uploaded successfully.")
             return redirect('upload_result')
-    else:
-        form = ResultUploadForm()
-    return render(request, 'upload_result.html', {'form': form})
+    elif selected_class_id:
+        form = ResultUploadForm(data={'classroom': selected_class_id})  # Pre-fill for filtering
+
+    return render(request, 'upload_result.html', {
+        'form': form,
+        'classrooms': Classroom.objects.all(),
+        'selected_class_id': selected_class_id
+    })
+
 
 # Profile picture view
 @login_required
