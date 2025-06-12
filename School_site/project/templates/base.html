@@ -25,6 +25,9 @@
       <li><a href="{% url 'news' %}">News</a></li>
       <li><a href="{% url 'profile' %}">Profile</a></li>
       {% if user.is_superuser %}
+      <li><a href="{% url 'all_students_results' %}">Admin Results</a></li>
+      {% endif %}
+      {% if user.is_superuser %}
       <li><a href="{% url 'upload_result' %}">+ Upload Result</a></li>
       <li><a href="{% url 'create_post' %}">+ Create Post</a></li>
       {% endif %}

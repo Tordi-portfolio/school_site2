@@ -135,3 +135,31 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def all_students_results(request):
+    classrooms = Classroom.objects.all()
+    selected_class_ids = request.GET.getlist('classroom')
+    selected_session = request.GET.get('session')
+    selected_term = request.GET.get('term')
+
+    results = []
+
+    if selected_class_ids and selected_session and selected_term:
+        results = Result.objects.select_related('student', 'student__classroom').filter(
+            student__classroom__id__in=selected_class_ids,
+            session=selected_session,
+            term=selected_term
+        ).order_by('student__classroom__name', 'student__username')
+
+    return render(request, 'all_students_results.html', {
+        'results': results,
+        'classrooms': classrooms,
+        'selected_class_ids': list(map(int, selected_class_ids)),
+        'selected_session': selected_session,
+        'selected_term': selected_term,
+        'terms': Result.TERM_CHOICES,
+        'sessions': Result.SESSION_CHOICES
+    })
